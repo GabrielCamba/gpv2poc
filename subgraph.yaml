@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.4
 schema:
   file: ./schema.graphql
 dataSources:
@@ -10,7 +10,7 @@ dataSources:
       abi: GPv2Settlement
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Interaction
@@ -32,4 +32,7 @@ dataSources:
           handler: handleSettlement
         - event: Trade(indexed address,address,address,uint256,uint256,uint256,bytes)
           handler: handleTrade
+      callHandlers: 
+        - function: settle(address[],uint256[],(uint256,uint256,address,uint256,uint256,uint32,bytes32,uint256,uint256,uint256,bytes)[],bytes[3])
+          handler: handleSettle
       file: ./src/g-pv-2-settlement.ts
